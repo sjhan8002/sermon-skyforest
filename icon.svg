@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192" role="img" aria-label="Good 설교노트">
+  <rect width="192" height="192" rx="38" fill="#38bdf8"/>
+  <path d="M48 48h48c18 0 32 8 40 20v76c-8-12-22-20-40-20H48z" fill="#fff" opacity=".96"/>
+  <path d="M96 48h48v76H96c-18 0-32 8-40 20V68c8-12 22-20 40-20z" fill="#e0f2fe"/>
+  <path d="M96 68v36M78 86h36" fill="none" stroke="#0284c7" stroke-linecap="round" stroke-width="9"/>
+</svg>

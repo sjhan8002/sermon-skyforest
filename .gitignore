@@ -1,6 +1,7 @@
 # Dependencies and Firebase local state
 node_modules/
 .firebase/
+public/
 
 # Release binaries and signing assets
 release/
