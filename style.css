@@ -1,0 +1,3091 @@
+:root {
+    /* Default: Light Theme */
+    --bg-dark: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-sidebar: #ffffff;
+    --accent-primary: #0284c7;
+    --accent-secondary: #4f46e5;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --border-color: rgba(0, 0, 0, 0.08);
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.dark-theme {
+    --bg-dark: #0f172a;
+    --bg-card: rgba(30, 41, 59, 0.7);
+    --bg-sidebar: #1e293b;
+    --accent-primary: #38bdf8;
+    --accent-secondary: #818cf8;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border-color: rgba(255, 255, 255, 0.1);
+    --glass-bg: rgba(15, 23, 42, 0.8);
+    --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+body {
+    font-family: 'Inter', 'Pretendard', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    transition: background-color 0.5s ease;
+}
+
+h1, h2, h3, .logo {
+    font-family: 'Outfit', sans-serif;
+}
+
+.app-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* View Containers */
+.view-container {
+    display: none;
+    height: 100vh;
+    width: 100vw;
+    overflow-y: auto;
+    background: var(--bg-dark);
+}
+
+.view-container.active {
+    display: flex;
+    flex-direction: column;
+}
+
+/* ============================================================
+   HOME SCREEN - PREMIUM REDESIGN
+   ============================================================ */
+
+/* Top Bar */
+.home-header {
+    padding: 0.6rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    flex-shrink: 0;
+}
+
+.home-header .logo {
+    font-size: 1.05rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--accent-primary);
+}
+
+/* Hero Banner */
+.home-hero {
+    background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 100%);
+    padding: 1.4rem 1.4rem 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-shrink: 0;
+    position: relative;
+    overflow: visible;
+}
+
+.home-hero::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 130px; height: 130px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+}
+
+.home-hero::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; right: 60px;
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+}
+
+.home-hero-greeting {
+    font-size: clamp(0.85rem, 4vw, 1.05rem);
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.9), 0 0 2px rgba(0,0,0,0.7);
+    margin-bottom: 0.3rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.home-hero-verse {
+    font-size: clamp(0.75rem, 3.8vw, 0.92rem);
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.9), 0 0 2px rgba(0,0,0,0.7);
+    line-height: 1.4;
+    white-space: normal;
+    word-break: keep-all;
+    overflow: visible;
+}
+
+.home-hero-date {
+    font-size: clamp(0.65rem, 3vw, 0.78rem);
+    color: #ffffff;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.home-stats {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.35rem;
+    z-index: 2;
+    flex-shrink: 0;
+    color: #ffffff;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.9), 0 0 2px rgba(0,0,0,0.7);
+}
+
+.stat-chip {
+    font-size: 0.7rem;
+    font-weight: 700;
+    background: rgba(0,0,0,0.45);
+    color: #ffffff;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 0.25rem 0.6rem;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    white-space: nowrap;
+    backdrop-filter: blur(4px);
+}
+
+/* Home Scrollable Area */
+.home-content {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 0;
+    position: relative;
+}
+
+/* Filter Tabs */
+.filter-tabs-wrapper {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem 0.5rem;
+    gap: 0.4rem;
+    background: var(--bg-dark);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.filter-tabs {
+    display: flex;
+    gap: 0.4rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    flex: 1;
+    padding-bottom: 2px;
+}
+
+.filter-tabs::-webkit-scrollbar { display: none; }
+
+.filter-tab {
+    white-space: nowrap;
+    padding: 0.35rem 0.85rem;
+    border-radius: 20px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    border: 1.5px solid var(--border-color);
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.filter-tab:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+}
+
+.filter-tab.active {
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    color: white;
+}
+
+.filter-tab-add {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    border: 1.5px dashed var(--border-color);
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.2s;
+}
+
+.filter-tab-add:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+}
+
+/* Note Cards List */
+.home-note-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 0.75rem 1rem;
+}
+
+.note-group-header {
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 1rem 0 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.note-group-header::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-color);
+}
+
+/* Rich Note Card */
+.note-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 0;
+    border-radius: 16px;
+    display: flex;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4,0,0.2,1);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    overflow: hidden;
+    margin-bottom: 0.65rem;
+}
+
+.note-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    border-color: var(--accent-primary);
+}
+
+.note-card:active {
+    transform: scale(0.98);
+}
+
+.note-card-date-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 52px;
+    padding: 0.75rem 0.5rem;
+    background: linear-gradient(160deg, var(--accent-primary), var(--accent-secondary));
+    color: white;
+    flex-shrink: 0;
+    border-radius: 0;
+}
+
+.note-card-date-day {
+    font-size: 1.4rem;
+    font-weight: 800;
+    line-height: 1;
+    font-family: 'Outfit', sans-serif;
+}
+
+.note-card-date-month {
+    font-size: 0.6rem;
+    font-weight: 700;
+    opacity: 0.85;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 2px;
+}
+
+.note-card-info {
+    flex: 1;
+    padding: 0.75rem 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    min-width: 0;
+}
+
+.note-card-info h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.3;
+}
+
+.note-card-info p {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.note-card-tags {
+    display: flex;
+    gap: 0.3rem;
+    flex-wrap: wrap;
+    margin-top: 0.1rem;
+}
+
+.note-card-chevron {
+    display: flex;
+    align-items: center;
+    padding: 0 0.75rem 0 0.25rem;
+    color: var(--text-muted);
+    opacity: 0.4;
+    font-size: 0.65rem;
+}
+
+.pane-worship-tag {
+    font-size: 0.62rem !important;
+    font-weight: 700 !important;
+    color: var(--accent-primary) !important;
+    background: rgba(2, 132, 199, 0.1) !important;
+    padding: 2px 7px !important;
+    border-radius: 20px !important;
+    border: 1px solid rgba(2,132,199,0.2) !important;
+    margin-bottom: 0 !important;
+    margin-right: 0 !important;
+}
+
+/* FAB Button */
+.home-fab {
+    position: fixed;
+    bottom: calc(60px + env(safe-area-inset-bottom, 0px) + 1.25rem);
+    right: 1.25rem;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: white;
+    border: none;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(2,132,199,0.45);
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 500;
+}
+
+.home-fab:hover {
+    transform: scale(1.1) rotate(45deg);
+    box-shadow: 0 10px 28px rgba(2,132,199,0.55);
+}
+
+.home-fab:active {
+    transform: scale(0.92) rotate(45deg);
+}
+
+/* Section Title (keep for other views) */
+.section-title {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.75rem;
+    padding-left: 0;
+    border-left: none;
+    padding: 0.5rem 1rem 0;
+}
+
+/* Empty state */
+.empty-state {
+    text-align: center;
+    padding: 3rem 1.5rem;
+    color: var(--text-muted);
+}
+
+.empty-state-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.3;
+}
+
+.empty-state-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+    color: var(--text-main);
+}
+
+.empty-state-desc {
+    font-size: 0.82rem;
+    line-height: 1.6;
+}
+
+
+/* Calendar Overlay */
+.calendar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3000;
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    height: 100vh;
+    width: 100vw;
+}
+
+.calendar-overlay.active {
+    display: flex;
+}
+
+.calendar-card {
+    background: var(--bg-sidebar);
+    width: 100%;
+    max-width: 420px;
+    border-radius: 28px;
+    padding: 1.5rem 1.75rem 2rem;
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 32px 64px -12px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.05) inset;
+    animation: calendarIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Subtle top gradient accent */
+.calendar-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #38bdf8, #818cf8, #34d399);
+    border-radius: 28px 28px 0 0;
+}
+
+@keyframes calendarIn {
+    from { opacity: 0; transform: scale(0.88) translateY(24px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding: 0 0.25rem;
+}
+
+.calendar-header h3 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--text-main);
+    letter-spacing: -0.3px;
+}
+
+.calendar-grid-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.75rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+/* 일요일 빨강, 토요일 파랑 */
+.calendar-grid-header span:first-child {
+    color: #ef4444;
+}
+.calendar-grid-header span:last-child {
+    color: #3b82f6;
+}
+.calendar-grid-header span:not(:first-child):not(:last-child) {
+    color: var(--text-muted);
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    color: var(--text-main);
+    user-select: none;
+}
+
+/* 일요일 */
+.calendar-day.sunday {
+    color: #ef4444;
+}
+/* 토요일 */
+.calendar-day.saturday {
+    color: #3b82f6;
+}
+
+
+.calendar-day:hover {
+    background: rgba(56, 189, 248, 0.12);
+    transform: scale(1.08);
+    box-shadow: 0 4px 12px rgba(56,189,248,0.15);
+}
+
+.calendar-day.today {
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(129, 140, 248, 0.12));
+    color: var(--accent-primary) !important;
+    font-weight: 900;
+    border: 2px solid rgba(56, 189, 248, 0.4);
+    box-shadow: 0 4px 14px rgba(56,189,248,0.2);
+}
+
+.calendar-day.has-note::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 5px;
+    background: var(--accent-primary);
+    border-radius: 50%;
+    box-shadow: 0 0 6px rgba(56,189,248,0.6);
+}
+
+.calendar-day.selected {
+    background: linear-gradient(135deg, #38bdf8, #818cf8);
+    color: #ffffff !important;
+    font-weight: 800;
+    box-shadow: 0 6px 18px rgba(56,189,248,0.4);
+    transform: scale(1.1);
+}
+
+.calendar-day.empty {
+    cursor: default;
+    pointer-events: none;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.version-buttons {
+    display: flex;
+    background: rgba(100, 116, 139, 0.1);
+    padding: 2px;
+    border-radius: 10px;
+    gap: 2px;
+}
+
+.v-btn {
+    border: none;
+    background: none;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    white-space: nowrap;
+}
+
+.v-btn.active {
+    background: var(--bg-card);
+    color: var(--accent-primary);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+body.dark-theme .v-btn.active {
+    background: var(--accent-primary);
+    color: #fff;
+}
+
+.version-select {
+    background: var(--bg-dark);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+}
+
+.version-tag {
+    font-size: 0.7rem;
+    background: rgba(100, 116, 139, 0.1);
+    color: var(--text-muted);
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-right: 6px;
+    font-weight: 800;
+    vertical-align: middle;
+}
+
+.calendar-day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    position: relative;
+    color: var(--text-main);
+}
+
+.calendar-day:hover {
+    background: rgba(100, 116, 139, 0.1);
+}
+
+.calendar-day.today {
+    background: rgba(2, 132, 199, 0.1);
+    color: var(--accent-primary);
+    font-weight: 800;
+}
+
+.calendar-day.has-note::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    width: 5px;
+    height: 5px;
+    background: var(--accent-primary);
+    border-radius: 50%;
+}
+
+.calendar-day.selected {
+    background: var(--accent-primary);
+    color: #ffffff;
+}
+
+/* Split Layout & Editor */
+.view-container.split-layout {
+    display: none;
+    flex-direction: row;
+}
+
+.view-container.split-layout.active {
+    display: flex;
+    overflow: hidden;
+}
+
+.editor-pane {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid var(--border-color);
+    overflow: hidden; /* Contain scroll inside editor-area */
+}
+
+.top-bar {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1rem;
+    gap: 0.5rem;
+    background: transparent;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    flex-wrap: wrap;
+    z-index: 10;
+}
+
+.title-row {
+    background: transparent;
+    padding: 0.4rem 1.25rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    display: flex;
+    align-items: center;
+    z-index: 9;
+}
+
+.title-row .title-input {
+    width: 100%;
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--text-main);
+    background: none;
+    border: none;
+    outline: none;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.icon-btn.small-btn {
+    font-size: 0.85rem;
+    font-weight: 800;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: rgba(100, 116, 139, 0.05);
+}
+
+.back-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: rgba(100, 116, 139, 0.1);
+    border: none;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.back-btn:hover {
+    background: rgba(100, 116, 139, 0.2);
+}
+
+.title-input {
+    background: none;
+    border: none;
+    color: var(--text-main);
+    caret-color: var(--text-main) !important;
+    font-size: 1.05rem;
+    font-weight: 800;
+    outline: none;
+    flex: 1;
+    min-width: 0; /* Important: allow shrinking */
+}
+
+.delete-btn {
+    background: transparent;
+    color: var(--text-muted) !important;
+    opacity: 0.5;
+    transition: var(--transition-smooth);
+}
+
+.delete-btn:hover {
+    background: rgba(239, 68, 68, 0.1) !important;
+    color: #ef4444 !important;
+    opacity: 1;
+}
+
+/* Rich Toolbar */
+.rich-toolbar {
+    display: flex;
+    align-items: center;
+    padding: 0.4rem 0.75rem;
+    gap: 0.3rem;
+    background: transparent;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    z-index: 8;
+}
+
+.rich-toolbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Row 3: Formatting toolbar */
+.toolbar-row-format {
+    padding: 0.35rem 0.75rem;
+    gap: 0.25rem;
+    background: var(--bg-card);
+    z-index: 55; /* 하단 툴바(actions)보다 높게 설정하여 팔레트가 겹칠 때 최상단으로 보이게 함 */
+}
+
+/* Row 4: Action toolbar */
+.toolbar-row-actions {
+    padding: 0.35rem 0.75rem;
+    gap: 0.5rem;
+    background: rgba(100, 116, 139, 0.04);
+    border-top: none;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
+/* Toolbar divider */
+.tb-divider {
+    width: 1px;
+    height: 22px;
+    background: var(--border-color);
+    margin: 0 0.2rem;
+    flex-shrink: 0;
+}
+
+.toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 0.15rem;
+    padding-right: 0.6rem;
+    margin-right: 0.2rem;
+    border-right: 1px solid var(--border-color);
+    flex-shrink: 0;
+}
+
+.toolbar-group:last-child {
+    border-right: none;
+    margin-right: 0;
+    padding-right: 0;
+}
+
+.toolbar-actions-right {
+    margin-left: auto;
+    border-right: none !important;
+    gap: 0.4rem !important;
+    padding-right: 0 !important;
+}
+
+/* Base toolbar button */
+.toolbar-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: none;
+    background: none;
+    color: var(--text-main);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+}
+
+.toolbar-btn:hover {
+    transform: scale(1.08);
+}
+
+.toolbar-btn:active {
+    transform: scale(0.92);
+}
+
+/* Colored toolbar buttons - Row 3 */
+.tb-bold {
+    background: rgba(30, 64, 175, 0.12);
+    color: #2563eb;
+    font-weight: 900;
+}
+.tb-bold:hover { background: rgba(30, 64, 175, 0.22) !important; color: #1d4ed8 !important; }
+
+.tb-italic {
+    background: rgba(124, 58, 237, 0.12);
+    color: #7c3aed;
+}
+.tb-italic:hover { background: rgba(124, 58, 237, 0.22) !important; color: #6d28d9 !important; }
+
+.tb-color-font {
+    background: rgba(239, 68, 68, 0.12);
+    color: #dc2626;
+}
+.tb-color-font:hover { background: rgba(239, 68, 68, 0.22) !important; color: #b91c1c !important; }
+
+.tb-highlight {
+    background: rgba(234, 179, 8, 0.15);
+    color: #b45309;
+}
+.tb-highlight:hover { background: rgba(234, 179, 8, 0.28) !important; color: #92400e !important; }
+
+.tb-size-down {
+    background: rgba(100, 116, 139, 0.12);
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+.tb-size-down:hover { background: rgba(100, 116, 139, 0.22) !important; }
+
+.tb-size-up {
+    background: rgba(100, 116, 139, 0.12);
+    color: var(--text-muted);
+    font-size: 0.75rem;
+}
+.tb-size-up:hover { background: rgba(100, 116, 139, 0.22) !important; }
+
+.tb-undo {
+    background: rgba(100, 116, 139, 0.10);
+    color: var(--text-muted);
+    font-size: 0.82rem;
+}
+.tb-undo:hover { background: rgba(100, 116, 139, 0.2) !important; }
+
+/* Row 4: Action Buttons */
+.action-toolbar-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 11px;
+    height: 30px;
+    border-radius: 20px;
+    border: none;
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.18s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+    letter-spacing: 0.01em;
+}
+
+.action-toolbar-btn:active { transform: scale(0.94); }
+
+.btn-meta {
+    background: rgba(2, 132, 199, 0.12);
+    color: var(--accent-primary);
+}
+.btn-meta:hover { background: rgba(2, 132, 199, 0.22); transform: scale(1.04); }
+
+.btn-kakao {
+    background: #fee500;
+    color: #000;
+}
+.btn-kakao:hover { background: #fdd800; transform: scale(1.04); box-shadow: 0 3px 10px rgba(254,229,0,0.5); }
+
+.btn-summary {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: white;
+    box-shadow: 0 3px 10px rgba(2, 132, 199, 0.35);
+}
+.btn-summary:hover { box-shadow: 0 4px 14px rgba(2, 132, 199, 0.5); transform: scale(1.04); }
+
+.btn-delete {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    margin-left: auto;
+}
+.btn-delete:hover { background: rgba(239, 68, 68, 0.2); transform: scale(1.04); }
+
+.toolbar-summary-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    width: auto !important;
+    padding: 0 14px !important;
+    font-size: 0.85rem !important;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary)) !important;
+    color: white !important;
+    border-radius: 20px !important;
+    border: none !important;
+    white-space: nowrap;
+    box-shadow: 0 3px 10px rgba(2, 132, 199, 0.35);
+    letter-spacing: 0.02em;
+}
+
+.toolbar-summary-btn:hover {
+    background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary)) !important;
+    transform: scale(1.04) !important;
+    box-shadow: 0 4px 14px rgba(2, 132, 199, 0.5);
+    color: white !important;
+}
+
+.toolbar-select {
+    background: rgba(100, 116, 139, 0.08);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 3px 6px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+    max-width: 70px;
+}
+
+
+.color-picker-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.color-palette {
+    position: static;
+    background: transparent; 
+    border: none;
+    padding: 0 4px 0 8px;
+    display: none; /* Toggle via JS */
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    box-shadow: none;
+    min-width: auto;
+}
+
+body.dark-theme .color-palette {
+    background: transparent; 
+}
+
+.color-palette.show {
+    display: flex;
+}
+
+.color-swatch {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: var(--transition-smooth);
+}
+
+.color-swatch:hover {
+    transform: scale(1.15);
+    border-color: var(--accent-primary);
+}
+
+.editor-sticky-header {
+    display: flex;
+    flex-direction: column;
+    /* Premium glassmorphic background */
+    background: linear-gradient(135deg, rgba(248, 250, 252, 0.95) 0%, rgba(226, 232, 240, 0.95) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.05);
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+
+body.dark-theme .editor-sticky-header {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.95) 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 20px -5px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-theme .top-bar,
+body.dark-theme .title-row,
+body.dark-theme .rich-toolbar,
+body.dark-theme .toolbar-row-notestyle {
+    border-bottom-color: rgba(255, 255, 255, 0.05);
+}
+
+.editor-area {
+    flex: 1;
+    padding: 0 !important;
+    padding-bottom: 20vh !important;
+    background: var(--bg-card) !important;
+    overflow-y: auto; /* Only this area scrolls */
+    -webkit-overflow-scrolling: touch;
+}
+
+#sermon-editor {
+    width: 100%;
+    min-height: 100%;
+    color: var(--text-main);
+    caret-color: var(--text-main) !important;
+    font-family: 'Malgun Gothic', '돋움', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    outline: none;
+    word-break: break-word;
+}
+
+#sermon-editor:empty:before {
+    content: attr(placeholder);
+    color: var(--text-muted);
+    pointer-events: none;
+    display: block;
+}
+
+/* =========================================================
+   Note Style Toolbar (Row 5)
+   ========================================================= */
+.toolbar-row-notestyle {
+    padding: 0.3rem 0.75rem;
+    gap: 0.4rem;
+    background: transparent;
+    border-bottom: none;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    align-items: center;
+}
+
+.notestyle-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-right: 0.1rem;
+}
+
+.notestyle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 9px;
+    height: 26px;
+    border-radius: 14px;
+    border: 1.5px solid var(--border-color);
+    background: none;
+    color: var(--text-muted);
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.notestyle-btn:hover {
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    background: rgba(2, 132, 199, 0.06);
+}
+
+.notestyle-btn.active {
+    border-color: var(--accent-primary);
+    background: var(--accent-primary);
+    color: white;
+}
+
+.bg-swatch {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 2px solid transparent;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.15s ease;
+    outline: none;
+}
+
+.bg-swatch:hover {
+    transform: scale(1.2);
+    border-color: var(--accent-primary) !important;
+}
+
+.bg-swatch.active {
+    transform: scale(1.15);
+    box-shadow: 0 0 0 2px var(--accent-primary);
+}
+
+/* =========================================================
+   Editor Note Styles (applied to .editor-area)
+   ========================================================= */
+
+/* Lined note */
+.editor-area.note-lined {
+    background-image: linear-gradient(rgba(100, 116, 139, 0.25) 1px, transparent 1px);
+    background-size: 100% 30px;
+    background-attachment: local;
+    background-position: 0 5px; /* Offset to align with text roughly */
+}
+
+/* Grid note */
+.editor-area.note-grid {
+    background-image:
+        linear-gradient(rgba(100, 116, 139, 0.25) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(100, 116, 139, 0.25) 1px, transparent 1px);
+    background-size: 30px 30px;
+    background-attachment: local;
+    background-position: 0 5px, 0 5px;
+}
+
+/* Dotted note */
+.editor-area.note-dotted {
+    background-image: radial-gradient(circle, rgba(100, 116, 139, 0.25) 1.5px, transparent 1.5px);
+    background-size: 30px 30px;
+    background-attachment: local;
+    background-position: 0 5px;
+}
+
+/* Music staff note (5-line staff) */
+.editor-area.note-music {
+    background-image: repeating-linear-gradient(
+        transparent,
+        transparent 10px,
+        rgba(100, 116, 139, 0.25) 10px,
+        rgba(100, 116, 139, 0.25) 11px,
+        transparent 11px,
+        transparent 16px,
+        rgba(100, 116, 139, 0.25) 16px,
+        rgba(100, 116, 139, 0.25) 17px,
+        transparent 17px,
+        transparent 22px,
+        rgba(100, 116, 139, 0.25) 22px,
+        rgba(100, 116, 139, 0.25) 23px,
+        transparent 23px,
+        transparent 28px,
+        rgba(100, 116, 139, 0.25) 28px,
+        rgba(100, 116, 139, 0.25) 29px,
+        transparent 29px,
+        transparent 34px,
+        rgba(100, 116, 139, 0.25) 34px,
+        rgba(100, 116, 139, 0.25) 35px,
+        transparent 35px,
+        transparent 90px
+    );
+    background-attachment: local;
+}
+
+
+/* Reference Panel */
+.reference-pane {
+    width: 40%;
+    min-width: 320px;
+    background: var(--bg-dark);
+    border-left: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.panel-header {
+    padding: 0.75rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.verse-gallery {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.75rem;
+}
+
+.verse-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 0.75rem 1rem;
+    border-radius: 16px;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    transition: var(--transition-smooth);
+}
+
+.verse-card.active-sync {
+    border-color: var(--accent-primary);
+    background: rgba(2, 132, 199, 0.05);
+    transform: scale(1.02);
+}
+
+.verse-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.4rem;
+}
+
+.verse-ref {
+    color: var(--accent-primary);
+    font-size: 0.9rem;
+    font-weight: 800;
+}
+
+.verse-actions {
+    display: flex;
+    gap: 0.4rem;
+}
+
+.verse-btn {
+    background: var(--accent-primary);
+    color: #fff;
+    border: none;
+    padding: 0.3rem 0.6rem;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.verse-btn:active { transform: scale(0.95); }
+
+.icon-btn {
+    background: rgba(100, 116, 139, 0.1);
+    border: none;
+    color: var(--text-main);
+    min-width: 34px;
+    height: 34px;
+    padding: 0 8px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    gap: 6px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.close-btn {
+    color: var(--text-main);
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+/* Segmented Control */
+.segmented-control {
+    display: flex;
+    background: rgba(100, 116, 139, 0.1);
+    padding: 2px;
+    border-radius: 10px;
+    gap: 2px;
+    flex-shrink: 0;
+}
+
+.control-btn {
+    border: none;
+    background: none;
+    padding: 6px 11px;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    white-space: nowrap;
+}
+
+.control-btn.active {
+    background: var(--bg-card);
+    color: var(--accent-primary);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+body.dark-theme .control-btn.active {
+    background: var(--accent-primary);
+    color: #fff;
+}
+
+.icon-btn.active {
+    background: var(--accent-primary);
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(2, 132, 199, 0.3);
+}
+
+.icon-btn:hover {
+    background: rgba(100, 116, 139, 0.2);
+}
+
+/* Responsive Split */
+@media (max-width: 768px) {
+    .app-container {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        overflow: hidden;
+    }
+    .logo span {
+        font-size: 1.15rem !important; /* 글자 크기 축소하여 줄바꿈 방지 */
+    }
+    .home-header {
+        padding: 0.75rem 0.5rem !important; /* 패딩을 줄여 공간 확보 */
+    }
+    .home-content {
+        padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px) + 2rem) !important; /* 하단 탭 바 + 관리자 버튼 여유 패딩 */
+    }
+    .view-container.split-layout.active {
+        flex-direction: column; /* Editor on Top, Bible on Bottom */
+        flex: 1;
+    }
+    .editor-pane { 
+        flex: 1;
+        height: auto;
+        border-right: none; 
+        border-bottom: none;
+        min-height: 0;
+    }
+    .reference-pane { 
+        width: 100%; 
+        height: 30dvh; /* Shrink to 30% height, giving 70% to Editor */
+        min-height: 100px;
+        background: var(--bg-card);
+        box-shadow: 0 -5px 15px rgba(0,0,0,0.05);
+        z-index: 10;
+    }
+    /* Mobile editor layout */
+    .view-container.split-layout:not(.manual-mode) .reference-pane,
+    #editor-bible-view:not(.manual-mode) #bible-view {
+        display: none !important;
+        height: 0 !important;
+        min-height: 0 !important;
+        max-height: 0 !important;
+        border: none !important;
+        overflow: hidden !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    .view-container.split-layout.active,
+    .view-container.split-layout.manual-mode.active {
+        display: flex !important;
+        flex-direction: column !important;
+        height: 100% !important;
+        overflow: hidden !important;
+    }
+    .view-container.split-layout.manual-mode .editor-pane {
+        display: contents !important;
+    }
+    .view-container.split-layout.manual-mode .reference-pane {
+        order: 1 !important;
+        display: flex !important;
+        flex-direction: column !important;
+        position: relative !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        min-height: 0 !important;
+        height: 42px !important;
+        max-height: 42px !important;
+        border-left: none !important;
+        border-top: none !important;
+        border-bottom: 2px solid var(--border-color) !important;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06) !important;
+        z-index: 10 !important;
+        background: var(--bg-card) !important;
+        overflow: hidden !important;
+        transition: height 0.25s ease;
+        flex-shrink: 0 !important;
+    }
+    .view-container.split-layout .editor-sticky-header {
+        flex-shrink: 0 !important;
+        width: 100% !important;
+        position: relative !important;
+        z-index: 1001 !important;
+    }
+    .view-container.split-layout.manual-mode .editor-sticky-header {
+        order: 2 !important;
+    }
+    .view-container.split-layout .editor-sticky-header .rich-toolbar {
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        scrollbar-width: thin !important;
+    }
+    .view-container.split-layout .editor-sticky-header .rich-toolbar::-webkit-scrollbar {
+        display: block !important;
+        height: 3px !important;
+    }
+    .view-container.split-layout.manual-mode .reference-pane.has-verses {
+        height: 35dvh !important;
+        max-height: 38dvh !important;
+    }
+    .view-container.split-layout .editor-area {
+        flex: 1 1 0% !important;
+        width: 100% !important;
+        min-height: 0 !important;
+        padding-right: 0.5rem !important;
+        overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        z-index: 1 !important;
+    }
+    .view-container.split-layout.manual-mode .editor-area {
+        order: 3 !important;
+    }
+    .view-container.split-layout.manual-mode .reference-pane .panel-header {
+        padding: 0.25rem 0.5rem !important;
+        position: relative !important;
+        z-index: 2010 !important; /* Ensure it stays above any header overlaps */
+        pointer-events: auto !important;
+    }
+    .view-container.split-layout.manual-mode .reference-pane .panel-header h3 {
+        font-size: 0.85rem !important;
+        margin: 0 !important;
+    }
+    .view-container.split-layout.manual-mode .verse-card {
+        padding: 0.35rem 0.5rem !important;
+        margin-bottom: 0.35rem !important;
+        border-radius: 8px !important;
+    }
+    .view-container.split-layout.manual-mode .verse-header {
+        margin-bottom: 0.15rem !important;
+    }
+    .view-container.split-layout.manual-mode .verse-text {
+        font-size: var(--bible-font-size, 0.82rem) !important;
+        line-height: 1.25 !important;
+    }
+    .view-container.split-layout.manual-mode .verse-ref {
+        font-size: 0.78rem !important;
+    }
+    .view-container.split-layout.manual-mode .verse-btn {
+        padding: 0.15rem 0.3rem !important;
+        font-size: 0.65rem !important;
+    }
+    .top-bar {
+        padding: 0.25rem 0.5rem !important;
+        min-height: 40px !important;
+        gap: 0.35rem !important;
+    }
+    .title-row {
+        padding: 0.4rem 0.8rem !important;
+    }
+    .title-row .title-input {
+        font-size: 1.25rem !important;
+    }
+    .metadata-row {
+        padding: 0.15rem 0.5rem !important;
+        gap: 0.4rem !important;
+    }
+    .rich-toolbar {
+        padding: 0.15rem 0.35rem !important;
+        gap: 0.25rem !important;
+    }
+    .toolbar-group {
+        padding-right: 0.3rem !important;
+        margin-right: 0.1rem !important;
+        gap: 0.15rem !important;
+    }
+    .editor-area {
+        padding: 0.5rem !important; /* Maximize writing area space */
+        padding-bottom: 50vh !important; /* Ensure caret can be scrolled above keyboard */
+    }
+    .back-btn {
+        width: 32px !important;
+        height: 32px !important;
+        border-radius: 6px !important;
+        font-size: 0.85rem !important;
+    }
+    .icon-btn.small-btn {
+        width: 30px !important;
+        height: 30px !important;
+        border-radius: 6px !important;
+        font-size: 0.8rem !important;
+        padding: 0 4px !important;
+    }
+    .toolbar-btn {
+        width: 26px !important;
+        height: 26px !important;
+        border-radius: 6px !important;
+        font-size: 0.72rem !important;
+    }
+    .toolbar-summary-btn {
+        padding: 0 10px !important;
+        height: 28px !important;
+        font-size: 0.75rem !important;
+    }
+    .v-btn, .control-btn {
+        width: auto !important;
+        min-width: 52px !important;
+        height: 30px !important;
+        border-radius: 6px !important;
+        font-size: 0.78rem !important;
+        padding: 0 10px !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    .worship-select, .date-input {
+        padding: 2px 4px !important;
+        font-size: 0.7rem !important;
+        border-radius: 6px !important;
+    }
+}
+
+.verse-text {
+    font-size: inherit; /* Allow parent font size control */
+    font-family: 'Nanum Myeongjo', '나눔명조', serif; /* 성경구절은 항상 명조체로 고정 */
+    line-height: 1.6;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    transition: var(--transition-smooth);
+}
+
+/* 에디터 본문 안에 자동 삽입된 성경구절 - 페이지 이동 후에도 폰트 유지 */
+.sermon-editor .bible-verse-inline,
+.sermon-editor font[face] {
+    font-family: 'Nanum Myeongjo', '나눔명조', serif !important;
+    font-style: normal !important;
+}
+
+/* Toast & Scrollbar */
+.toast {
+    position: fixed;
+    top: 5rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(-200px);
+    background: var(--text-main);
+    color: var(--bg-dark);
+    padding: 1rem 1.5rem;
+    border-radius: 14px;
+    font-weight: 600;
+    transition: var(--transition-smooth);
+    z-index: 10000;
+    white-space: pre-wrap;
+    line-height: 1.5;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    width: max-content;
+    max-width: 90%;
+}
+
+.toast.show { transform: translateX(-50%) translateY(0); }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-thumb { background: var(--text-muted); border-radius: 10px; }
+
+/* ==========================================================================
+   Worship Type (Project) Section Styles
+   ========================================================================== */
+.worship-section {
+    margin-bottom: 2rem;
+    animation: fadeIn 0.4s ease;
+}
+
+.worship-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-right: 0.25rem;
+}
+
+.worship-section-header #add-worship-type-btn {
+    background: rgba(2, 132, 199, 0.08);
+    color: var(--accent-primary);
+    border: 1px solid rgba(2, 132, 199, 0.15);
+    padding: 0.4rem 0.8rem;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 800;
+    transition: var(--transition-smooth);
+}
+
+.worship-section-header #add-worship-type-btn:hover {
+    background: var(--accent-primary);
+    color: #ffffff;
+    border-color: var(--accent-primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(2, 132, 199, 0.2);
+}
+
+body.dark-theme .worship-section-header #add-worship-type-btn {
+    background: rgba(56, 189, 248, 0.12);
+    border-color: rgba(56, 189, 248, 0.2);
+}
+
+body.dark-theme .worship-section-header #add-worship-type-btn:hover {
+    background: var(--accent-primary);
+    color: #0f172a;
+    box-shadow: 0 4px 10px rgba(56, 189, 248, 0.3);
+}
+
+.worship-type-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.worship-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    transition: var(--transition-smooth);
+    overflow: hidden;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03);
+}
+
+.worship-card:hover {
+    border-color: var(--accent-primary);
+    box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.06);
+}
+
+.worship-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.95rem 1.25rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.worship-card-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.worship-card-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba(2, 132, 199, 0.08);
+    color: var(--accent-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    transition: var(--transition-smooth);
+}
+
+body.dark-theme .worship-card-icon {
+    background: rgba(56, 189, 248, 0.12);
+}
+
+.worship-card:hover .worship-card-icon {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: #ffffff;
+}
+
+body.dark-theme .worship-card:hover .worship-card-icon {
+    color: #0f172a;
+}
+
+.worship-card-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.worship-card-count {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    background: rgba(100, 116, 139, 0.08);
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 800;
+    margin-left: 0.4rem;
+}
+
+.worship-card .edit-worship-btn,
+.worship-card .delete-worship-btn {
+    display: none !important;
+}
+
+.worship-card.expanded .edit-worship-btn,
+.worship-card.expanded .delete-worship-btn {
+    display: flex !important;
+}
+
+.worship-card-toggle {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.worship-card.expanded .worship-card-toggle {
+    transform: rotate(180deg);
+    color: var(--accent-primary);
+}
+
+.worship-sermons-list {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(100, 116, 139, 0.01);
+}
+
+.worship-card.expanded .worship-sermons-list {
+    max-height: 500px;
+    overflow-y: auto;
+    border-top: 1px solid var(--border-color);
+}
+
+.worship-sermon-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.25rem 0.75rem 3rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    border-bottom: 1px solid rgba(100, 116, 139, 0.03);
+}
+
+.worship-sermon-item:last-child {
+    border-bottom: none;
+}
+
+.worship-sermon-item:hover {
+    background: rgba(2, 132, 199, 0.03);
+    padding-left: 3.25rem;
+}
+
+.worship-sermon-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 1rem;
+}
+
+.worship-sermon-date {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Editor Metadata Row
+   ========================================================================== */
+.metadata-row {
+    display: flex;
+    gap: 1.5rem;
+    padding: 0.5rem 1.25rem;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.metadata-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.metadata-item i {
+    font-size: 0.9rem;
+    color: var(--accent-primary);
+}
+
+.worship-select, .date-input {
+    background: rgba(100, 116, 139, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-radius: 8px;
+    padding: 4px 8px;
+    outline: none;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    font-family: inherit;
+}
+
+.worship-select:focus, .date-input:focus {
+    border-color: var(--accent-primary);
+    background: var(--bg-card);
+    box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.08);
+}
+
+/* ==========================================================================
+   Calendar Slide-Over Pane
+   ========================================================================== */
+.calendar-card {
+    position: relative;
+    overflow: hidden; /* Clips the sliding pane */
+}
+
+.calendar-notes-pane {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-sidebar);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1.75rem;
+    transform: translateX(105%);
+    transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -8px 0 24px rgba(0,0,0,0.12);
+}
+
+.calendar-notes-pane.active {
+    transform: translateX(0);
+}
+
+
+.pane-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    width: 100%;
+}
+
+.pane-header h4 {
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--text-main);
+    flex: 1;
+    text-align: center;
+}
+
+.pane-list {
+    flex: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding-right: 2px;
+}
+
+.pane-note-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    padding: 0.85rem 1.1rem;
+    border-radius: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.pane-note-card:hover {
+    border-color: var(--accent-primary);
+    transform: translateX(4px);
+    background: rgba(2, 132, 199, 0.02);
+}
+
+.pane-note-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.pane-note-info h5 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.pane-note-info p {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pane-worship-tag {
+    background: rgba(2, 132, 199, 0.08);
+    color: var(--accent-primary);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-weight: 800;
+    font-size: 0.65rem;
+}
+
+body.dark-theme .pane-worship-tag {
+    background: rgba(56, 189, 248, 0.12);
+}
+
+/* ==========================================================================
+   Worship Type Modal (Glassmorphism Modal)
+   ========================================================================== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3100;
+    background: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    height: 100vh;
+    width: 100vw;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-card {
+    background: var(--bg-sidebar);
+    width: 100%;
+    max-width: 360px;
+    border-radius: 24px;
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-lg);
+    animation: zoomIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.modal-header h3 {
+    font-size: 1.1rem;
+    color: var(--text-main);
+    font-weight: 800;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.modal-input {
+    width: 100%;
+    padding: 0.75rem 0.95rem;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-dark);
+    color: var(--text-main);
+    font-size: 0.9rem;
+    outline: none;
+    transition: var(--transition-smooth);
+    font-family: inherit;
+}
+
+.modal-input:focus {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1);
+    background: var(--bg-card);
+}
+
+.large-save-btn {
+    width: 100%;
+    padding: 0.85rem;
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    border: none;
+    border-radius: 12px;
+    color: #ffffff;
+    font-size: 0.9rem;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(2, 132, 199, 0.2);
+    transition: var(--transition-smooth);
+}
+
+.large-save-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(2, 132, 199, 0.3);
+}
+
+body.dark-theme .large-save-btn {
+    color: #0f172a;
+}
+
+/* ==========================================================================
+   Editor Sticky Header Fix
+   ========================================================================== */
+.editor-pane {
+    overflow: hidden; /* Allow children to be sticky within this flex container */
+}
+
+.top-bar,
+.title-row,
+.rich-toolbar {
+    flex-shrink: 0;
+}
+
+
+
+
+
+
+
+/* Stack headers correctly as sticky within a flex column container */
+.editor-pane {
+    display: flex;
+    flex-direction: column;
+}
+
+.editor-area {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0; /* Critical: allows flex child to shrink */
+}
+
+/* ==========================================================================
+   User Identity Modal (교구명 / 셀명 / 성도명)
+   ========================================================================== */
+.identity-modal-overlay {
+    background: rgba(2, 10, 30, 0.6) !important;
+    backdrop-filter: blur(16px);
+}
+
+.identity-modal-card {
+    max-width: 420px !important;
+    padding: 2rem !important;
+    border-radius: 28px !important;
+    animation: zoomIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+}
+
+.identity-modal-header {
+    text-align: center;
+    margin-bottom: 1.75rem;
+}
+
+.identity-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--accent-primary);
+    margin-bottom: 0.85rem;
+}
+
+.identity-logo i {
+    font-size: 1.6rem;
+    color: var(--accent-primary);
+}
+
+.identity-subtitle {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.identity-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.identity-label {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.identity-label i {
+    color: var(--accent-primary);
+    font-size: 0.85rem;
+}
+
+.identity-input {
+    background: var(--bg-dark) !important;
+    border-color: var(--border-color) !important;
+    transition: var(--transition-smooth);
+}
+
+.identity-input:focus {
+    border-color: var(--accent-primary) !important;
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.12) !important;
+}
+
+/* Current user badge shown in home header */
+.user-identity-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+    background: rgba(2, 132, 199, 0.08);
+    border: 1px solid rgba(2, 132, 199, 0.15);
+    border-radius: 20px;
+    padding: 0.25rem 0.65rem;
+    cursor: pointer;
+    white-space: nowrap;
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: var(--transition-smooth);
+}
+
+.user-identity-badge i {
+    font-size: 0.75rem;
+    flex-shrink: 0;
+}
+
+.user-identity-badge:hover {
+    background: rgba(2, 132, 199, 0.15);
+    border-color: var(--accent-primary);
+}
+
+body.dark-theme .user-identity-badge {
+    background: rgba(56, 189, 248, 0.1);
+    border-color: rgba(56, 189, 248, 0.2);
+}
+
+\n
+
+
+
+\n
+/* Premium Month Group Header Styling */
+.month-group-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 1.2rem;
+    background: linear-gradient(145deg, var(--bg-card), rgba(255, 255, 255, 0.02));
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--accent-primary);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px -5px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.month-group-header:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px -5px rgba(0, 0, 0, 0.08);
+    border-color: var(--accent-primary);
+}
+.month-group-header.expanded {
+    background: var(--accent-primary);
+    color: white;
+    border-color: var(--accent-primary);
+    box-shadow: 0 8px 25px -5px rgba(var(--accent-primary-rgb), 0.3);
+}
+.month-group-left {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+}
+.month-group-label {
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+.month-group-header.expanded .month-group-label {
+    color: white;
+}
+.month-group-count {
+    font-size: 0.8rem;
+    background: rgba(128, 128, 128, 0.15);
+    color: var(--text-muted);
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 700;
+}
+.month-group-header.expanded .month-group-count {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+.month-group-right {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+.youtube-month-btn {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+.youtube-month-btn:hover {
+    background: #ef4444;
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+.month-group-header.expanded .youtube-month-btn {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+.month-group-header.expanded .youtube-month-btn:hover {
+    background: white;
+    color: #ef4444;
+}
+.month-chevron {
+    color: var(--text-muted);
+    transition: transform 0.3s ease;
+}
+.month-group-header.expanded .month-chevron {
+    color: white;
+}
+\n
+/* Forced single line layout overrides */
+.month-group-header {
+    flex-wrap: nowrap;
+    padding: 0.8rem 1rem;
+}
+.month-group-left {
+    flex-wrap: nowrap !important;
+    gap: 0.5rem !important;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+}
+.month-group-left::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+}
+.month-group-label, .month-group-count {
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+.youtube-month-btn {
+    margin-left: 0.2rem !important;
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding: 4px 8px !important;
+    font-size: 0.8rem !important;
+}
+.month-chevron {
+    flex-shrink: 0;
+    margin-left: 0.5rem;
+}
+
+/* Ensure bible font size buttons always receive pointer events and stay on top */
+.bible-font-control {
+    position: relative !important;
+    z-index: 9999 !important;
+    pointer-events: auto !important;
+}
+.bible-font-control button {
+    position: relative !important;
+    z-index: 10000 !important;
+    pointer-events: auto !important;
+}
+
+/* Mobile Toolbar Adjustments */
+@media (max-width: 450px) {
+    .toolbar-btn-large {
+        padding: 0.3rem 0.25rem !important;
+        font-size: 0.9rem !important;
+        gap: 3px !important;
+    }
+    .toolbar-btn-large span {
+        font-size: 0.8rem !important;
+        font-weight: 700;
+    }
+    .rich-toolbar {
+        padding: 0.3rem 0.1rem !important;
+        gap: 0.1rem !important;
+    }
+}
+
+
+/* Editor Placeholder */
+.sermon-editor[placeholder].show-placeholder:before {
+    content: attr(placeholder);
+    color: #cccccc; /* 연하게 표시 */
+    pointer-events: none;
+    position: absolute; /* 커서 위치 방해 방지 */
+    white-space: pre-wrap;
+    font-size: 0.9em;
+    max-width: 100%;
+}
+
+/* ============================================
+   Bottom Tab Bar
+   ============================================ */
+.bottom-tab-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid var(--border-color);
+    z-index: 9000;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.bottom-tab-bar.hidden {
+    transform: translateY(100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.tab-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    max-width: 90px;
+    gap: 3px;
+    background: none;
+    border: none;
+    padding: 6px 4px;
+    cursor: pointer;
+    color: var(--text-muted);
+    font-size: 0.68rem;
+    font-weight: 600;
+    transition: all 0.25s ease;
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.tab-btn i {
+    font-size: 1.25rem;
+    transition: all 0.25s ease;
+}
+
+.tab-btn.active {
+    color: var(--accent-primary);
+}
+
+.tab-btn.active i {
+    transform: scale(1.15);
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 28px;
+    height: 3px;
+    background: var(--accent-primary);
+    border-radius: 0 0 4px 4px;
+}
+
+.tab-btn:active {
+    transform: scale(0.92);
+}
+
+/* Tab view (non-sermon views need bottom padding) */
+.view-container.tab-view {
+    padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px));
+    display: none;
+    flex-direction: column;
+}
+.view-container.tab-view.active {
+    display: flex;
+}
+
+/* Home view bottom padding when tab bar is visible */
+.home-content {
+    padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px) + 2rem) !important;
+}
+
+/* ============================================
+   Bible Reader View
+   ============================================ */
+.bible-reader-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.bible-reader-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.bible-reader-title i {
+    color: var(--accent-primary);
+    font-size: 1.3rem;
+}
+
+.bible-version-toggle {
+    display: flex;
+    background: var(--bg-dark);
+    border-radius: 10px;
+    padding: 3px;
+    gap: 2px;
+}
+
+.rv-btn {
+    padding: 6px 14px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+
+.rv-btn.active {
+    background: var(--accent-primary);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(2, 132, 199, 0.3);
+}
+
+/* Breadcrumb */
+.bible-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 10px 16px;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.82rem;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.bc-item {
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.bc-item:hover {
+    background: var(--bg-dark);
+}
+
+.bc-item.active {
+    color: var(--accent-primary);
+    font-weight: 700;
+}
+
+.bc-separator {
+    color: var(--text-muted);
+    opacity: 0.4;
+    font-size: 0.7rem;
+}
+
+/* Bible Content Area */
+.bible-content-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px;
+    padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px) + 1rem);
+}
+
+/* Book List */
+.bible-book-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.bible-testament-section {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.testament-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 4px 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.testament-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border-color);
+}
+
+.testament-book-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+}
+
+.bible-book-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 4px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--text-main);
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.3;
+    min-height: 48px;
+}
+
+.bible-book-btn:hover {
+    border-color: var(--accent-primary);
+    background: rgba(2, 132, 199, 0.05);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.bible-book-btn:active {
+    transform: scale(0.96);
+}
+
+.bible-book-btn.ot {
+    border-left: 3px solid #10b981;
+}
+
+.bible-book-btn.nt {
+    border-left: 3px solid #6366f1;
+}
+
+/* Chapter Grid */
+.bible-chapter-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.chapter-grid-header {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-main);
+    padding: 4px 4px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.chapter-grid-header i {
+    color: var(--accent-primary);
+}
+
+.chapter-number-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+}
+
+.chapter-num-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 8px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--text-main);
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.chapter-num-btn:hover {
+    border-color: var(--accent-primary);
+    background: rgba(2, 132, 199, 0.08);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.chapter-num-btn:active {
+    transform: scale(0.94);
+    background: var(--accent-primary);
+    color: white;
+}
+
+/* Verse View */
+.bible-verse-view {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.verse-view-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px;
+}
+
+.verse-view-title {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.verse-view-title i {
+    color: var(--accent-primary);
+}
+
+.verse-chapter-nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.verse-nav-btn {
+    padding: 6px 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--text-main);
+    font-size: 0.85rem;
+    transition: all 0.2s;
+}
+
+.verse-nav-btn:hover {
+    background: var(--accent-primary);
+    color: white;
+    border-color: var(--accent-primary);
+}
+
+.verse-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.verse-list-container {
+    background: var(--bg-card);
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    padding: 16px;
+    box-shadow: var(--shadow-lg);
+}
+
+.verse-item {
+    display: flex;
+    gap: 10px;
+    padding: 8px 4px;
+    border-bottom: 1px solid var(--border-color);
+    line-height: 1.7;
+    transition: background 0.15s;
+}
+
+.verse-item:last-child {
+    border-bottom: none;
+}
+
+.verse-item:active {
+    background: rgba(2, 132, 199, 0.06);
+    border-radius: 8px;
+}
+
+.verse-num {
+    color: var(--accent-primary);
+    font-weight: 800;
+    font-size: 0.8rem;
+    min-width: 28px;
+    text-align: right;
+    padding-top: 2px;
+    flex-shrink: 0;
+}
+
+.verse-content {
+    color: var(--text-main);
+    font-size: 1rem;
+    font-family: 'Nanum Myeongjo', '나눔명조', serif;
+    line-height: 1.85;
+}
+
+/* ============================================
+   Bible Search View
+   ============================================ */
+.bible-search-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.bible-search-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.bible-search-title i {
+    color: var(--accent-primary);
+    font-size: 1.1rem;
+}
+
+.bible-search-bar {
+    padding: 12px 16px;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.search-input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg-dark);
+    border: 2px solid var(--border-color);
+    border-radius: 14px;
+    padding: 10px 14px;
+    transition: border-color 0.25s;
+}
+
+.search-input-wrap:focus-within {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.12);
+}
+
+.search-input-wrap i {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    flex-shrink: 0;
+}
+
+.search-input-wrap input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 0.95rem;
+    color: var(--text-main);
+    font-weight: 500;
+}
+
+.search-input-wrap input::placeholder {
+    color: var(--text-muted);
+    opacity: 0.7;
+}
+
+.search-clear-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.search-clear-btn:hover {
+    color: var(--text-main);
+}
+
+.bible-search-status {
+    padding: 10px 16px;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.bible-search-results {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 16px;
+    padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px) + 1rem);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.search-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.search-result-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.search-result-card:hover {
+    border-color: var(--accent-primary);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+    transform: translateY(-1px);
+}
+
+.search-result-card:active {
+    transform: scale(0.98);
+}
+
+.search-result-ref {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.search-result-ref i {
+    font-size: 0.7rem;
+}
+
+.search-result-text {
+    font-size: 0.88rem;
+    color: var(--text-main);
+    line-height: 1.6;
+    font-family: 'Nanum Myeongjo', '나눔명조', serif;
+}
+
+.search-result-text mark {
+    background: rgba(254, 240, 138, 0.6);
+    color: inherit;
+    padding: 1px 2px;
+    border-radius: 3px;
+}
+
+body.dark-theme .search-result-text mark {
+    background: rgba(234, 179, 8, 0.3);
+}
+
+.search-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    gap: 8px;
+}
+
+.search-loading i {
+    animation: spin 1s linear infinite;
+}
+
+/* ============================================
+   Responsive adjustments
+   ============================================ */
+@media (min-width: 768px) {
+    .testament-book-grid {
+        grid-template-columns: repeat(6, 1fr);
+    }
+    .chapter-number-grid {
+        grid-template-columns: repeat(10, 1fr);
+    }
+}

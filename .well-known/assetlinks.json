@@ -1,0 +1,17 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "christian.sermon.myapp",
+      "sha256_cert_fingerprints": [
+        "67:09:19:76:C4:A3:FC:A7:F3:3C:E3:CE:04:6F:DF:F1:F6:8F:EF:9B:07:A5:9A:06:47:D0:F1:C5:8C:57:56:5B",
+        "DB:3C:E8:D6:AC:E3:B1:61:73:37:35:D0:4F:04:B1:89:45:55:A8:1E:77:82:20:42:8D:3D:11:BC:1D:D6:B5:79",
+        "C0:29:81:4A:8E:EF:FF:24:D4:9D:60:5A:F8:63:E1:72:38:B0:5F:B4:0D:7F:CA:F1:F5:EB:08:CC:D5:3C:69:0E",
+        "20:37:AF:A5:FA:2F:81:23:F6:47:4A:0C:EB:D7:9E:94:04:EC:A8:84:4A:38:18:45:97:77:0D:46:AA:88:29:68",
+        "F5:8D:59:62:08:56:3A:E4:4B:F0:58:4E:6E:88:DD:4A:1C:C1:DD:21:02:92:C5:4F:B5:5E:15:AF:F9:11:28:6C",
+        "14:C1:11:73:00:58:7C:4B:06:EF:1C:F5:16:FD:4B:A9:91:B4:80:43:8C:90:8A:CD:D6:B7:4F:54:03:A9:64:98"
+      ]
+    }
+  }
+]

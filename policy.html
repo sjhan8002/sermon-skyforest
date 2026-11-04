@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>개인정보처리방침 - Good설교노트</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Nanum+Gothic:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0284c7;
+            --primary-dark: #0369a1;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', 'Nanum Gothic', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border);
+        }
+
+        header {
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(2, 132, 199, 0.1);
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            margin-bottom: 0.75rem;
+        }
+
+        h1 {
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .date-info {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        h2::before {
+            content: "";
+            display: inline-block;
+            width: 4px;
+            height: 1.1rem;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        p, ul {
+            color: #334155;
+            font-size: 0.98rem;
+            margin-bottom: 1rem;
+        }
+
+        ul {
+            padding-left: 1.4rem;
+        }
+
+        li {
+            margin-bottom: 0.4rem;
+        }
+
+        .highlight-box {
+            background: #f0f9ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            margin: 1.25rem 0;
+            font-size: 0.95rem;
+            color: #0369a1;
+        }
+
+        footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem 0.5rem;
+            }
+            .container {
+                padding: 1.5rem 1.2rem;
+                border-radius: 16px;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <span class="badge">Privacy Policy</span>
+            <h1>개인정보처리방침</h1>
+            <div class="date-info">Good설교노트 (Sky Forest) | 시행일자: 2026년 6월 1일 (최신 개정: 2026년 9월 20일)</div>
+        </header>
+
+        <div class="highlight-box">
+            <strong>Good설교노트</strong>는 이용자의 개인정보를 매우 소중하게 생각하며, 「개인정보 보호법」 및 관련 법령을 준수합니다. 본 방침은 앱 이용 시 어떠한 정보가 처리되는지 투명하게 안내하기 위해 마련되었습니다.
+        </div>
+
+        <h2>1. 수집하는 개인정보 항목 및 수집 방법</h2>
+        <p>Good설교노트는 회원가입 없이 사용할 수 있는 독립형 애플리케이션으로, 불필요한 개인 식별 정보를 일체 수집하거나 외부 서버로 무단 전송하지 않습니다.</p>
+        <ul>
+            <li><strong>설교 기록 및 메모 데이터:</strong> 이용자가 작성한 설교 노트 본문, 손글씨/펜 드로잉 메모 등은 이용자의 스마트폰(기기 내부 로컬 저장소 / IndexedDB)에만 안전하게 저장됩니다.</li>
+            <li><strong>기기 권한 안내:</strong>
+                <ul>
+                    <li><strong>마이크(오디오 녹음) 권한:</strong> 설교 음성 녹음 기능을 이용자가 직접 실행할 때만 사용되며, 녹음된 오디오 파일은 사용자의 기기 내부에만 임시/영구 보관됩니다. 외부 서버로 전송되지 않습니다.</li>
+                    <li><strong>인터넷 연결 권한:</strong> 온라인 성경 구절 검색 및 공개 성경 데이터(개역개정, 흠정역 등) 조회 시에만 사용됩니다.</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h2>2. 개인정보의 이용 목적</h2>
+        <p>앱이 취급하는 모든 데이터는 오직 다음의 목적으로만 기기 내에서 처리됩니다:</p>
+        <ul>
+            <li>설교 노트 작성, 편집, 조회 및 손글씨 메모 지원</li>
+            <li>성경 본문 검색 및 말씀 인용 기능 제공</li>
+            <li>설교 중 음성 메모 녹음 및 재생 편의 제공</li>
+        </ul>
+
+        <h2>3. 개인정보의 보유 및 이용 기간</h2>
+        <p>이용자의 모든 설교 노트 및 녹음 데이터는 <strong>이용자의 기기 내부에 저장</strong>되므로, 이용자가 앱 내에서 해당 노트를 삭제하거나 앱을 삭제(제거)할 때 즉시 영구적으로 파기됩니다.</p>
+
+        <h2>4. 개인정보의 제3자 제공 및 위탁</h2>
+        <p>Good설교노트는 이용자의 개인정보를 제3자에게 제공하거나 판매하지 않으며, 외부 업체에 처리를 위탁하지 않습니다.</p>
+
+        <h2>5. 아동의 개인정보 보호</h2>
+        <p>Good설교노트는 만 14세 미만 아동을 포함한 모든 연령층이 안전하게 예배와 성경 공부에 활용할 수 있도록 설계되었으며, 어떠한 개인 식별 정보도 수집하지 않습니다.</p>
+
+        <h2>6. 이용자의 권리 및 행사 방법</h2>
+        <p>이용자는 언제든지 앱 내부 기능을 통해 본인이 작성한 설교 기록, 메모, 녹음 파일을 열람, 수정 또는 즉시 삭제할 수 있습니다.</p>
+
+        <h2>7. 개인정보 보호책임자 및 문의처</h2>
+        <p>Good설교노트의 개인정보 보호 정책 또는 앱 이용과 관련하여 문의 사항이 있으신 경우 아래로 연락 주시기 바랍니다.</p>
+        <ul>
+            <li><strong>개발자/제공자:</strong> Sky Forest (Good설교노트 개발팀)</li>
+            <li><strong>문의 이메일:</strong> bird8@naver.com</li>
+            <li><strong>웹사이트:</strong> <a href="https://sermon-note-35104.web.app" style="color: var(--primary); text-decoration: none;">https://sermon-note-35104.web.app</a></li>
+        </ul>
+
+        <footer>
+            &copy; 2026 Good설교노트 (Sky Forest). All rights reserved.
+        </footer>
+    </div>
+</body>
+</html>
