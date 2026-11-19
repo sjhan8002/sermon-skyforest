@@ -7505,18 +7505,6 @@ function renderBibleBooks() {
     }).join('');
 
     container.innerHTML = `
-        <div class="bible-book-list-intro bible-book-picker-header">
-            <div class="bible-picker-icon"><i class="fas fa-bible"></i></div>
-            <div class="bible-list-heading">
-                <span class="bible-list-eyebrow">BIBLE READER · 66 BOOKS</span>
-                <h2>성경 권 선택</h2>
-                <p>성경 이름을 누르면 장을 선택할 수 있습니다.</p>
-            </div>
-        </div>
-        <nav class="bible-testament-jump" aria-label="성경 구분 바로가기">
-            <button type="button" class="testament-jump-btn ot" onclick="document.getElementById('old-testament-books')?.scrollIntoView({ behavior: 'smooth', block: 'start' })"><span>구약</span><small>${otBooks.length}권</small></button>
-            <button type="button" class="testament-jump-btn nt" onclick="document.getElementById('new-testament-books')?.scrollIntoView({ behavior: 'smooth', block: 'start' })"><span>신약</span><small>${ntBooks.length}권</small></button>
-        </nav>
         <section class="bible-testament-section ot-section" id="old-testament-books">
             <div class="testament-title">
                 <span class="testament-title-mark"><i class="fas fa-scroll"></i></span>
