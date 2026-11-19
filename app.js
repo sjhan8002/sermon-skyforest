@@ -7495,19 +7495,48 @@ function renderBibleBooks() {
     const otBooks = BIBLE_BOOK_INFO.filter(b => b.testament === 'ot');
     const ntBooks = BIBLE_BOOK_INFO.filter(b => b.testament === 'nt');
 
+    const renderBooks = (books, testament) => books.map((b, index) => {
+        const chapters = BIBLE_CHAPTER_COUNTS[b.id - 1] || 1;
+        return `<button class="bible-book-btn ${testament}" type="button" onclick="selectBibleBook(${b.id})" aria-label="${b.name}, ${chapters}장 선택">
+                    <span class="bible-book-ordinal">${String(index + 1).padStart(2, '0')}</span>
+                    <span class="bible-book-name">${b.name}</span>
+                    <span class="bible-book-chapters">${chapters}장</span>
+                </button>`;
+    }).join('');
+
     container.innerHTML = `
-        <div class="bible-testament-section">
-            <div class="testament-title">📜 구약성경 (${otBooks.length}권)</div>
-            <div class="testament-book-grid">
-                ${otBooks.map(b => `<button class="bible-book-btn ot" onclick="selectBibleBook(${b.id})">${b.name}</button>`).join('')}
+        <div class="bible-book-list-intro bible-book-picker-header">
+            <div class="bible-picker-icon"><i class="fas fa-bible"></i></div>
+            <div class="bible-list-heading">
+                <span class="bible-list-eyebrow">BIBLE READER · 66 BOOKS</span>
+                <h2>성경 권 선택</h2>
+                <p>성경 이름을 누르면 장을 선택할 수 있습니다.</p>
             </div>
         </div>
-        <div class="bible-testament-section">
-            <div class="testament-title">✝️ 신약성경 (${ntBooks.length}권)</div>
-            <div class="testament-book-grid">
-                ${ntBooks.map(b => `<button class="bible-book-btn nt" onclick="selectBibleBook(${b.id})">${b.name}</button>`).join('')}
+        <nav class="bible-testament-jump" aria-label="성경 구분 바로가기">
+            <button type="button" class="testament-jump-btn ot" onclick="document.getElementById('old-testament-books')?.scrollIntoView({ behavior: 'smooth', block: 'start' })"><span>구약</span><small>${otBooks.length}권</small></button>
+            <button type="button" class="testament-jump-btn nt" onclick="document.getElementById('new-testament-books')?.scrollIntoView({ behavior: 'smooth', block: 'start' })"><span>신약</span><small>${ntBooks.length}권</small></button>
+        </nav>
+        <section class="bible-testament-section ot-section" id="old-testament-books">
+            <div class="testament-title">
+                <span class="testament-title-mark"><i class="fas fa-scroll"></i></span>
+                <span class="testament-title-copy"><strong>구약성경</strong><small>창세기부터 말라기까지</small></span>
+                <span class="testament-count">${otBooks.length}권</span>
             </div>
-        </div>
+            <div class="testament-book-grid">
+                ${renderBooks(otBooks, 'ot')}
+            </div>
+        </section>
+        <section class="bible-testament-section nt-section" id="new-testament-books">
+            <div class="testament-title">
+                <span class="testament-title-mark"><i class="fas fa-cross"></i></span>
+                <span class="testament-title-copy"><strong>신약성경</strong><small>마태복음부터 요한계시록까지</small></span>
+                <span class="testament-count">${ntBooks.length}권</span>
+            </div>
+            <div class="testament-book-grid">
+                ${renderBooks(ntBooks, 'nt')}
+            </div>
+        </section>
     `;
 }
 
